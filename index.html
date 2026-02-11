@@ -1,43 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>ArtMash 🎨</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ArtMash — Ranking de Artes Visuales</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-<h1 class="titulo">🎨 ArtMash</h1>
-<p class="subtitulo">Comparación A/B para descubrir tu disciplina artística ideal</p>
+<header class="wrap">
+  <h1>🎨 ArtMash</h1>
+  <p class="sub">Comparación A/B para construir rankings de artes visuales.</p>
+</header>
 
-<div class="contenedor">
+<main class="wrap grid">
 
-    <!-- Panel Comparación -->
-    <div class="panel comparacion">
-        <h2>Elige tu favorita</h2>
+  <section class="card">
+    <h2>1) Configura</h2>
 
-        <div class="opciones">
-            <button id="opcionA" class="boton-opcion"></button>
-            <span class="vs">VS</span>
-            <button id="opcionB" class="boton-opcion"></button>
-        </div>
+    <label>Perfil</label>
+    <select id="segmentSelect"></select>
 
-        <button onclick="nuevaComparacion()" class="boton-secundario">
-            Nuevo duelo
-        </button>
+    <label>Contexto</label>
+    <select id="contextSelect"></select>
+
+    <div class="row">
+      <button id="btnNewPair" class="ghost">Nuevo duelo</button>
+      <button id="btnReset" class="danger">Reiniciar</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2) Elige</h2>
+    <p id="question" class="question"></p>
+
+    <div class="duel">
+      <button id="btnA" class="pick">
+        <span class="tag">A</span>
+        <span id="labelA" class="title"></span>
+      </button>
+
+      <button id="btnB" class="pick">
+        <span class="tag">B</span>
+        <span id="labelB" class="title"></span>
+      </button>
     </div>
 
-    <!-- Panel Ranking -->
-    <div class="panel ranking">
-        <h2>🏆 Ranking Final</h2>
-        <ul id="rankingLista"></ul>
-        <button onclick="reiniciar()" class="boton-secundario">
-            Reiniciar
-        </button>
+    <div class="row">
+      <button id="btnExport" class="primary">Descargar base de datos</button>
+      <button id="btnShowTop" class="ghost">Ver Ranking</button>
     </div>
+  </section>
 
-</div>
+  <section class="card">
+    <h2>3) Ranking (Top 10)</h2>
+    <div id="topBox" class="topbox"></div>
+  </section>
 
-<script src="script.js"></script>
+</main>
+
+<footer class="wrap foot">
+  <small>Algoritmo A/B + Elo aplicado a Artes Visuales.</small>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
