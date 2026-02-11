@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ArtMash - Algoritmo de Recomendación en Artes Visuales</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+```
+<div class="container">
+    <h1>ArtMash 🎨</h1>
+    <p>Elige la disciplina que más te atraiga en cada comparación.</p>
+
+    <div id="comparison">
+        <button id="optionA" onclick="vote('A')"></button>
+        <span class="vs">VS</span>
+        <button id="optionB" onclick="vote('B')"></button>
+    </div>
+
+    <div id="results" class="hidden">
+        <h2>Ranking Final</h2>
+        <ol id="rankingList"></ol>
+        <button onclick="restart()">Reiniciar</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
