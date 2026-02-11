@@ -1,33 +1,43 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>ArtMash - Algoritmo de Recomendación en Artes Visuales</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>ArtMash 🎨</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-```
-<div class="container">
-    <h1>ArtMash 🎨</h1>
-    <p>Elige la disciplina que más te atraiga en cada comparación.</p>
+<h1 class="titulo">🎨 ArtMash</h1>
+<p class="subtitulo">Comparación A/B para descubrir tu disciplina artística ideal</p>
 
-    <div id="comparison">
-        <button id="optionA" onclick="vote('A')"></button>
-        <span class="vs">VS</span>
-        <button id="optionB" onclick="vote('B')"></button>
+<div class="contenedor">
+
+    <!-- Panel Comparación -->
+    <div class="panel comparacion">
+        <h2>Elige tu favorita</h2>
+
+        <div class="opciones">
+            <button id="opcionA" class="boton-opcion"></button>
+            <span class="vs">VS</span>
+            <button id="opcionB" class="boton-opcion"></button>
+        </div>
+
+        <button onclick="nuevaComparacion()" class="boton-secundario">
+            Nuevo duelo
+        </button>
     </div>
 
-    <div id="results" class="hidden">
-        <h2>Ranking Final</h2>
-        <ol id="rankingList"></ol>
-        <button onclick="restart()">Reiniciar</button>
+    <!-- Panel Ranking -->
+    <div class="panel ranking">
+        <h2>🏆 Ranking Final</h2>
+        <ul id="rankingLista"></ul>
+        <button onclick="reiniciar()" class="boton-secundario">
+            Reiniciar
+        </button>
     </div>
+
 </div>
 
 <script src="script.js"></script>
-```
-
 </body>
 </html>
