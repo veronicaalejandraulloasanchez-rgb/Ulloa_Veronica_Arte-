@@ -1,144 +1,65 @@
-const disciplinas = [
-    { nombre: "Pintura Contemporánea", puntos: 0 },
+let disciplinas = [
+    { nombre: "Pintura", puntos: 0 },
+    { nombre: "Escultura", puntos: 0 },
+    { nombre: "Fotografía", puntos: 0 },
     { nombre: "Ilustración Digital", puntos: 0 },
-    { nombre: "Fotografía Artística", puntos: 0 },
-    { nombre: "Arte Conceptual", puntos: 0 },
-    { nombre: "Escultura Experimental", puntos: 0 },
-    { nombre: "Animación 2D/3D", puntos: 0 },
-    { nombre: "Diseño Visual", puntos: 0 },
     { nombre: "Arte Urbano", puntos: 0 },
-    { nombre: "Videoarte", puntos: 0 },
-    { nombre: "Instalación Multimedia", puntos: 0 }
+    { nombre: "Animación", puntos: 0 },
+    { nombre: "Diseño Gráfico", puntos: 0 },
+    { nombre: "Grabado", puntos: 0 }
 ];
 
-let totalComparaciones = 0;
-let maxComparaciones = 15;
-let opcionActualA, opcionActualB;
+let opcionA;
+let opcionB;
 
-function generarComparacion() {
-    opcionActualA = disciplinas[Math.floor(Math.random() * disciplinas.length)];
-    opcionActualB = disciplinas[Math.floor(Math.random() * disciplinas.length)];
+function nuevaComparacion() {
+    let indices = [];
 
-    while (opcionActualA === opcionActualB) {
-        opcionActualB = disciplinas[Math.floor(Math.random() * disciplinas.length)];
+    while (indices.length < 2) {
+        let random = Math.floor(Math.random() * disciplinas.length);
+        if (!indices.includes(random)) {
+            indices.push(random);
+        }
     }
 
-    document.getElementById("optionA").innerText = opcionActualA.nombre;
-    document.getElementById("optionB").innerText = opcionActualB.nombre;
+    opcionA = disciplinas[indices[0]];
+    opcionB = disciplinas[indices[1]];
+
+    document.getElementById("opcionA").innerText = opcionA.nombre;
+    document.getElementById("opcionB").innerText = opcionB.nombre;
 }
 
-function vote(opcion) {
-    if (opcion === 'A') {
-        opcionActualA.puntos++;
-    } else {
-        opcionActualB.puntos++;
-    }
+document.getElementById("opcionA").addEventListener("click", function() {
+    opcionA.puntos++;
+    actualizarRanking();
+    nuevaComparacion();
+});
 
-    totalComparaciones++;
+document.getElementById("opcionB").addEventListener("click", function() {
+    opcionB.puntos++;
+    actualizarRanking();
+    nuevaComparacion();
+});
 
-    if (totalComparaciones >= maxComparaciones) {
-        mostrarResultados();
-    } else {
-        generarComparacion();
-    }
-}
-
-function mostrarResultados() {
-    document.getElementById("comparison").classList.add("hidden");
-    document.getElementById("results").classList.remove("hidden");
-
+function actualizarRanking() {
     disciplinas.sort((a, b) => b.puntos - a.puntos);
 
-    const lista = document.getElementById("rankingList");
+    let lista = document.getElementById("rankingLista");
     lista.innerHTML = "";
 
-    disciplinas.forEach(d => {
-        const li = document.createElement("li");
-        li.innerText = d.nombre + " - " + d.puntos + " puntos";
+    disciplinas.forEach(function(disciplina, index) {
+        let li = document.createElement("li");
+        li.textContent = (index + 1) + ". " + disciplina.nombre + " (" + disciplina.puntos + ")";
         lista.appendChild(li);
     });
 }
 
-function restart() {
-    disciplinas.forEach(d => d.puntos = 0);
-    totalComparaciones = 0;
-
-    document.getElementById("comparison").classList.remove("hidden");
-    document.getElementById("results").classList.add("hidden");
-
-    generarComparacion();
-}
-
-generarComparacion();
-const disciplinas = [
-    { nombre: "Pintura Contemporánea", puntos: 0 },
-    { nombre: "Ilustración Digital", puntos: 0 },
-    { nombre: "Fotografía Artística", puntos: 0 },
-    { nombre: "Arte Conceptual", puntos: 0 },
-    { nombre: "Escultura Experimental", puntos: 0 },
-    { nombre: "Animación 2D/3D", puntos: 0 },
-    { nombre: "Diseño Visual", puntos: 0 },
-    { nombre: "Arte Urbano", puntos: 0 },
-    { nombre: "Videoarte", puntos: 0 },
-    { nombre: "Instalación Multimedia", puntos: 0 }
-];
-
-let totalComparaciones = 0;
-let maxComparaciones = 15;
-let opcionActualA, opcionActualB;
-
-function generarComparacion() {
-    opcionActualA = disciplinas[Math.floor(Math.random() * disciplinas.length)];
-    opcionActualB = disciplinas[Math.floor(Math.random() * disciplinas.length)];
-
-    while (opcionActualA === opcionActualB) {
-        opcionActualB = disciplinas[Math.floor(Math.random() * disciplinas.length)];
-    }
-
-    document.getElementById("optionA").innerText = opcionActualA.nombre;
-    document.getElementById("optionB").innerText = opcionActualB.nombre;
-}
-
-function vote(opcion) {
-    if (opcion === 'A') {
-        opcionActualA.puntos++;
-    } else {
-        opcionActualB.puntos++;
-    }
-
-    totalComparaciones++;
-
-    if (totalComparaciones >= maxComparaciones) {
-        mostrarResultados();
-    } else {
-        generarComparacion();
-    }
-}
-
-function mostrarResultados() {
-    document.getElementById("comparison").classList.add("hidden");
-    document.getElementById("results").classList.remove("hidden");
-
-    disciplinas.sort((a, b) => b.puntos - a.puntos);
-
-    const lista = document.getElementById("rankingList");
-    lista.innerHTML = "";
-
-    disciplinas.forEach(d => {
-        const li = document.createElement("li");
-        li.innerText = d.nombre + " - " + d.puntos + " puntos";
-        lista.appendChild(li);
+function reiniciar() {
+    disciplinas.forEach(function(d) {
+        d.puntos = 0;
     });
+    actualizarRanking();
+    nuevaComparacion();
 }
 
-function restart() {
-    disciplinas.forEach(d => d.puntos = 0);
-    totalComparaciones = 0;
-
-    document.getElementById("comparison").classList.remove("hidden");
-    document.getElementById("results").classList.add("hidden");
-
-    generarComparacion();
-}
-
-generarComparacion();
+nuevaComparacion();
